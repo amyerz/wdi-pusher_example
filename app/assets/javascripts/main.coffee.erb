@@ -1,5 +1,11 @@
 pusher = new Pusher("<%= Pusher.key %>")
 channel = pusher.subscribe('chat')
 
-channel.bind 'new_message', (data) ->
- console.log(data.message)
+
+jQuery ->
+	message = $('#messages')
+
+	channel.bind 'new_message', (data) ->
+		new_message = $('<li>#{data.message}</li>')
+
+		messages.prepend(new_message)
